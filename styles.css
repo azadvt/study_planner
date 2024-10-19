@@ -1,21 +1,18 @@
 body {
-	font-family: Arial, sans-serif;
+	font-family: 'Arial', sans-serif;
 	background-color: #f4f4f4;
 	margin: 0;
-	padding: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
+	height: 100%;
 }
 
 .container {
-	background-color: white;
+	min-height: calc(100vh - 150px);
+	margin: 20px auto;
+	max-width: 600px;
+	background: white;
 	padding: 20px;
 	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-	width: 90%;
-	max-width: 600px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -25,23 +22,22 @@ h1 {
 
 .task-form {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	margin-bottom: 20px;
 }
 
 .task-form input {
-	flex: 1;
 	padding: 10px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	margin-right: 10px;
+	margin-bottom: 10px;
 	font-size: 16px;
 }
 
 .task-form button {
 	padding: 10px 15px;
 	border: none;
-	background-color: #28a745;
+	background: #28a745;
 	color: white;
 	cursor: pointer;
 	border-radius: 4px;
@@ -49,7 +45,7 @@ h1 {
 }
 
 .task-form button:hover {
-	background-color: #218838;
+	background: #218838;
 }
 
 #task-list {
@@ -57,21 +53,15 @@ h1 {
 }
 
 .task {
-	background-color: #f9f9f9;
-	border: 1px solid #ddd;
+	margin: 10px 0;
 	padding: 10px;
+	border: 1px solid #ddd;
 	border-radius: 5px;
-	margin-bottom: 10px;
+	background: #f9f9f9;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
-
-.task.completed {
-	text-decoration: line-through;
-	color: gray;
-}
-
 .progress {
 	margin-bottom: 20px;
 }
@@ -84,12 +74,31 @@ h1 {
 	margin-top: 5px;
 }
 
+.task.completed span {
+	text-decoration: line-through;
+	color: #751212;
+}
+
+.progress-container {
+	width: 100%;
+	background-color: #e0e0e0;
+	border-radius: 4px;
+	margin-top: 10px;
+}
+
 .progress-bar-fill {
-	background-color: #28a745;
 	height: 100%;
+	background-color: #28a745;
+	border-radius: 4px;
 	width: 0%;
 	transition: width 0.3s;
 }
+
+#progress-percentage {
+	text-align: right;
+	font-weight: bold;
+}
+
 .task-actions {
 	display: flex;
 	gap: 10px;
@@ -111,4 +120,49 @@ h1 {
 .task-actions button:nth-child(2) {
 	background-color: #000000;
 	color: white;
+}
+
+@media (max-width: 600px) {
+	.container {
+		margin: 10px;
+		padding: 15px;
+	}
+
+	.task-form {
+		flex-direction: column;
+	}
+
+	.task-form input {
+		margin-right: 0;
+	}
+
+	.task-actions {
+		flex-direction: column;
+	}
+
+	.task-actions button {
+		width: 100%;
+	}
+
+	.task {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	#progress-percentage {
+		font-size: 14px;
+	}
+}
+
+footer {
+	background-color: #f8f8f8;
+	padding: 10px 0;
+	text-align: center;
+	width: 100%;
+	margin-top: 1rem;
+}
+
+footer p {
+	margin: 5px 0;
+	font-size: 14px;
 }
