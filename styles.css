@@ -58,9 +58,10 @@ h1 {
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	background: #f9f9f9;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+}
+.task > span {
+	font-size: 18px;
+	word-break: break-all;
 }
 .progress {
 	margin-bottom: 20px;
@@ -74,7 +75,7 @@ h1 {
 	margin-top: 5px;
 }
 
-.task.completed span {
+.task.completed > span {
 	text-decoration: line-through;
 	color: #751212;
 }
@@ -101,7 +102,11 @@ h1 {
 
 .task-actions {
 	display: flex;
+	flex-direction: row;
 	gap: 10px;
+	margin-top: 10px;
+	width: 160px;
+	margin-left: auto;
 }
 
 .task-actions button {
@@ -110,6 +115,7 @@ h1 {
 	cursor: pointer;
 	border-radius: 4px;
 	transition: background 0.3s;
+	width: 100%;
 }
 
 .task-actions button:nth-child(1) {
@@ -144,6 +150,7 @@ h1 {
 		flex-direction: column;
 		align-items: flex-start;
 	}
+
 	.task span {
 		margin-bottom: 10px;
 	}
@@ -164,4 +171,33 @@ footer {
 footer p {
 	margin: 5px 0;
 	font-size: 14px;
+}
+
+.time-tracker {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.time-tracker > div {
+	margin-left: auto;
+}
+.time-tracker span {
+	font-weight: bold;
+}
+
+.time-tracker button {
+	padding: 5px;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+	background-color: #007bff;
+	color: white;
+	width: 50px;
+	height: 25px;
+}
+
+.time-tracker button:hover {
+	background-color: #0056b3;
 }

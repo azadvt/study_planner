@@ -16,6 +16,14 @@ function renderTasks() {
 		}
 		taskDiv.innerHTML = `
             <span>${task.name}</span>
+            <div class="time-tracker">
+                <span>Time Spent: ${formatTime(task.timeSpent)}</span>
+               <div>
+			    <button onclick="startTimer(${index})">Start</button>
+                <button onclick="stopTimer(${index})">Stop</button>
+                <button onclick="resetTimer(${index})">Reset</button>
+				</div>
+            </div>
             <div class="task-actions">
                 <button onclick="toggleTask(${index})">${
 			task.completed ? 'Undo' : 'Complete'
@@ -28,10 +36,42 @@ function renderTasks() {
 	updateProgress();
 }
 
+function formatTime(seconds) {
+	const hrs = Math.floor(seconds / 3600);
+	const mins = Math.floor((seconds % 3600) / 60);
+	const secs = seconds % 60;
+	return `${hrs.toString().padStart(2, '0')}:${mins
+		.toString()
+		.padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+let timerIntervals = {};
+
+function startTimer(index) {
+	if (timerIntervals[index]) return;
+	timerIntervals[index] = setInterval(() => {
+		tasks[index].timeSpent = (tasks[index].timeSpent || 0) + 1;
+		localStorage.setItem('tasks', JSON.stringify(tasks));
+		renderTasks();
+	}, 1000);
+}
+
+function stopTimer(index) {
+	clearInterval(timerIntervals[index]);
+	delete timerIntervals[index];
+}
+
+function resetTimer(index) {
+	stopTimer(index);
+	tasks[index].timeSpent = 0;
+	localStorage.setItem('tasks', JSON.stringify(tasks));
+	renderTasks();
+}
+
 function addTask() {
 	const taskName = taskInput.value.trim();
 	if (taskName) {
-		tasks.push({ name: taskName, completed: false });
+		tasks.push({ name: taskName, completed: false, timeSpent: 0 });
 		localStorage.setItem('tasks', JSON.stringify(tasks));
 		taskInput.value = '';
 		renderTasks();
