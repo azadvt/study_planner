@@ -80,6 +80,11 @@ function addTask() {
 
 function toggleTask(index) {
 	tasks[index].completed = !tasks[index].completed;
+
+	if (tasks[index].completed) {
+		stopTimer(index);
+	}
+
 	localStorage.setItem('tasks', JSON.stringify(tasks));
 	renderTasks();
 }
